@@ -39,7 +39,7 @@ def todo_edit(request, pk):
 
 
 def done_list(request):
-    dones = Todo.objects.filter(complet=True)
+    dones = Todo.objects.filter(complete=True)
     return render(request, 'todo/done_list.html', {'dones': dones})
 
 
