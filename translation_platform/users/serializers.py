@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.models import update_last_login
-from rest_framework_jwt.settings import api_settings
+# from rest_framework_jwt.settings import api_settings
 
 # JWT 사용을 위한 설정
-JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
-JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
+# JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
+# JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
 
 User = get_user_model()
 
@@ -15,17 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        login_id = validated_data.get('login_id')
-        email = validated_data.get('email')
-        password = validated_data.get('password')
-        user = User(
-            login_id=login_id,
-            email=email
-        )
-        user.set_password(password)
-        user.save()
-        return user
-
+        return User.objects.create_user(**validated_data)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

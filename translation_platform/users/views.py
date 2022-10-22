@@ -8,6 +8,7 @@ from .serializers import RegisterSerializer, UserSerializer
 # Create your views here.
 class RegisterAPIView(APIView):
     def post(self, request):
+        import ipdb; ipdb.set_trace()
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
